@@ -1,0 +1,442 @@
+{% extends 'testapp/base.html' %}
+{% block title %}
+YOUR AVERAGE RESULT
+{% endblock  %}
+{% block content %}
+<div class="jumbotron container">
+      <div class="alert-success">
+      {% if messages %}
+            {% for message in messages%}
+            {{message}}
+            {% endfor %}
+      {% endif %}
+</div>
+      <h1>Rating Key:</h1>
+      <div class="row"><h5>1.</h5>Strongly disagree</div> 
+      <div class="row"><h5>2.</h5>Disagree</div>
+      <div class="row"><h5>3.</h5>Somewhat Agree</div>
+      <div class="row"><h5>4.</h5>Agree</div>
+      <div class="row"><h5>5.</h5>Strongly Agree</div>
+</div>
+<div class="container">
+      <h1>Fill this form</h1>
+      
+
+      <form method="POST" action="{% url 'studentform' %}">
+            {% csrf_token %}
+            <div class="row">
+                  <h3>Select your semester</h3>&nbsp;
+                  <select name="semester" id="semester" class="btn btn-light" style="width:80px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                  </select>
+                  &nbsp;&nbsp;
+                  <h3>Select your branch</h3>&nbsp;
+                  <select name="branch_name" id="branchname" class="btn btn-light" style="width:180px">
+                        {% for branchh in branch %}
+                        <option value="{{branchh}}">{{branchh}}</option>
+                        {% endfor %}
+                  </select>
+            </div>
+
+            <br>
+            <table class='table table-dark table-boardered'>
+
+                  <tr>
+                        <th>SUBJECT</th>
+                        <th>SUBJECT CODE</th>
+                        <th>FCULTY NAME</th>
+                        <th>SUBJECT KNOWLEDGE</th>
+                        <th>PRATICAL KNOWLEDGE</th>
+                        <th>CLASS MAINTAINANCE</th>
+                  </tr>
+
+                  <tr>
+                        <td>
+                              <select name="subject_name1" id="subjectname" id="fname1" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code1" id="subjectcode1" id="subject_code1" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name1" id="fname1" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know1" id="subknow1" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know1" id="praknow1" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main1" id="classmain1" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+                        <td>
+                              <select name="subject_name2" id="subjectname2" id="subject_name2" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code2" id="subjectcode2" id="subject_code2" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name2" id="fname2" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know2" id="subknow2" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know2" id="praknow2" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main2" id="classmain2" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+
+                        <td>
+                              <select name="subject_name3" id="subjectname3" id="subject_name3" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code3" id="subjectcode3" id="subject_code3" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name3" class="btn btn-light" id="fname3" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+
+                        <td>
+                              <select name="sub_know3" id="subknow3" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know3" id="praknow3" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main3" id="classmain3" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+                        <td>
+                              <select name="subject_name4" id="subjectname4" id="subject_name2" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code4" id="subjectcode4" id="subject_code2" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name4" class="btn btn-light" id="fname4" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know4" id="subknow4" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know4" id="praknow4" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main4" id="classmain4" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+                        <td>
+                              <select name="subject_name5" id="subjectname5" id="subject_name5" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code5" id="subjectcode5" id="subject_code5" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name5" id="fname5" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know5" id="subknow5" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know5" id="praknow5" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main5" id="classmain5" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+                        <td>
+                              <select name="subject_name6" id="subjectname6" id="subject_name6" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value="{{sub_name}}">{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code6" id="subjectcode6" id="subject_code6" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name6" id="fname6" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know6" id="subknow6" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know6" id="praknow6" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main6" id="classmain6" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                              </select>
+                        </td>
+                  </tr>
+                  <tr>
+                        <td>
+                              <select name="subject_name7" id="subjectname7" id="subject_name7" class="btn btn-light"
+                                    style="width:180px">
+                                    {% for sub_name in subjectname %}
+                                    <option value={{sub_name}}>{{sub_name}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="subject_code7" id="subjectcode7" id="subject_code7" class="btn btn-light"
+                                    style="width:120px">
+                                    {% for sub_code in subjectcode %}
+                                    <option value="{{sub_code}}">{{sub_code}}</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="f_name7" id="fname7" class="btn btn-light">
+                                    {% for f_name in fname %}
+                                    <option value="{{f_name.username}}">
+                                          {{f_name.first_name}}&nbsp;{{f_name.last_name}}({{f_name.username}})</option>
+                                    {% endfor %}
+                              </select>
+                        </td>
+                        <td>
+                              <select name="sub_know7" id="subknow7" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    
+                              </select>
+                        </td>
+                        <td>
+                              <select name="pra_know7" id="praknow7" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    
+                              </select>
+                        </td>
+                        <td>
+                              <select name="class_main7" id="classmain7" class="btn btn-light" style="width:100px">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    
+                              </select>
+                        </td>
+                  </tr>
+            </table>
+            <input class="btn btn-primary" type="submit" value="Submit">
+</div>
+</form>
+{% endblock  %}

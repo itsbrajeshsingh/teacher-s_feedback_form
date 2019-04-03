@@ -1,0 +1,64 @@
+{% extends 'testapp/base.html' %}
+{% block title %}
+RESULT
+{% endblock  %}
+{% block content %}
+<div class = "alert-success">
+{% if messages %}
+            {% for message in messages%}
+            {{message}}
+            {% endfor %}
+{% endif %}
+</div>
+<h1>YOUR AVERAGE RESULT</h1>
+<form action="{% url 'facultyresult' %}" method="POST">
+      <table class='table  table-bordered thread-dark'>
+            <tr>
+                  <th class="th">SUBJECT</th>
+                  <th>SEMESTER</th>
+                  <th>BRANCH</th>
+                  <th>MONTH</th>
+                  <th>SUBJECT KNOWLEDGE</th>
+                  <th>PRATICAL KNOWLEDGE</th>
+                  <th>CLASS MAINTAINANCE</th>
+            </tr>
+            {% for subject,sam,branch,month,sub_know,pra_know,class_main in myzip %}
+            <tr>
+                  <td>
+
+                        {{subject}}
+
+                  </td>
+                  <td>
+
+                        {{sam}}
+
+                  </td>
+                  <td>
+                        {{branch}}
+                  </td>
+                  <td>
+                        {{month}}
+                  </td>
+                  <td>
+
+                        {{sub_know}}
+
+                  </td>
+                  <td>
+
+                        {{pra_know}}
+
+                  </td>
+                  <td>
+
+                        {{class_main}}
+
+                  </td>
+            </tr>
+
+            {% endfor %}
+
+      </table>
+</form>
+{% endblock  %}

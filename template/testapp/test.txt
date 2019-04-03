@@ -1,0 +1,91 @@
+if report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('subject_knowledge'))['subject_knowledge__avg'] is None:
+                    break
+                else:
+                    sub_know_avg.append(report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('subject_knowledge'))['subject_knowledge__avg'])
+                if report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('pratical_knowledge'))['pratical_knowledge__avg'] is None:
+                    break
+                else:
+                    pra_know_avg.append(report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('pratical_knowledge'))['pratical_knowledge__avg'])
+                if report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('class_maintainance'))['class_maintainance__avg'] is None:
+                    break
+                else:
+                    class_main_avg.append(report.objects.filter(faculty_name = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('class_maintainance'))['class_maintainance__avg'])
+
+
+
+
+
+
+
+
+
+
+
+                          print(username)
+                print(sub_know_avg)
+                print(pra_know_avg)
+                print(class_main_avg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                current_user = request.user
+    username = User.objects.get(username = current_user.username)
+    result = reporter.objects.all().filter(f_username = username)
+    sub_name_lst = []
+    sem_lst = []
+    branch_name_lst = []
+    for i in range(len(result)):
+        sub_name_lst.append(result[i].subject_name)
+        sem_lst.append(result[i].semester)
+        branch_name_lst.append(result[i].branch_name) 
+    sub_name_lst = list(set(sub_name_lst))
+    sem_lst = list(set(sem_lst))
+    branch_name_lst = list(set(branch_name_lst))
+    sub_know_avg = []
+    pra_know_avg = []
+    class_main_avg = []
+    semesterlst = []
+    branchnamelst = []
+    subjectlst = []
+    for semester in sem_lst:
+        for branch in branch_name_lst:
+            for subject_name in sub_name_lst:
+                rpt = reporter.objects.all().filter(f_username = username)
+                if rpt.f_username == username and rpt.branch_name == branch and rpt.subject_name == subject_name and rpt.semester == semester:
+                    semesterlst.append(semester)
+                    branchnamelst.append(branch)
+                    subjectlst.append(subject_name)
+                    mydct = reporter.objects.filter(f_username = username,branch_name = branch,semester = semester,subject_name = subject_name).aggregate(Avg('subject_knowledge'),Avg('pratical_knowledge',Avg('class_maintainance')))
+                    sub_know_avg.append(mydct['subject_knowledge__avg'])
+                    pra_know_avg.append(mydct['pratical_knowledge__avg'])
+                    class_main_avg.append(mydct['class_maintainance__avg'])
+    myzip = zip(subjectlst,semesterlst,branchnamelst,sub_know_avg,pra_know_avg,class_main_avg)
+    return render(request,'testapp/facultyresult.html',{'myzip':myzip})
